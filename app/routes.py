@@ -36,3 +36,9 @@ def login():
             form.username.data, form.remember_me.data))
         return redirect(url_for('index'))
     return render_template('login.html', title='Sign In', form=form)
+
+# define view for about page
+@app.route('/about')
+def about():
+    return render_template('about.html', title='About')
+    
