@@ -1,8 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Hi, {{ user.username }}!</h1>
+    <h1>Welcome, {{ user.username }}.</h1>
+    <img src="https://ericgerlachdotcom.files.wordpress.com/2015/12/bear-in-thought.jpg">
+    <br><br>
+    <h2>Recent Paw-nderings:</h2>
     {% for post in posts %}
-    <div><p>{{ post.author.username }} says: <b>{{ post.body }}</b></p></div>
+    <div>
+      <p><img src="{{ post.image }}"> {{ post.author.username }} says:
+        <b>{{ post.body }}</b>
+      </p>
+    </div>
     {% endfor %}
 {% endblock %}

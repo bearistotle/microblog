@@ -9,20 +9,24 @@ def index():
     user = {'username': 'Brandon'}
     posts = [
         {
-            'author': {'username': 'Jim'},
+            'author': {'username': 'Car'},
+            'image': 'https://i.pinimg.com/474x/83/06/74/830674470a92d1e739b1123a85a727e9.jpg',
             'body': 'Beautiul day in Philly!'
         },
         {
-            'author': {'username': 'Dwight'},
-            'body': 'The Avengers movie was awesome!'
+            'author': {'username': 'Brandon'},
+            'image': 'https://twistedsifter.files.wordpress.com/2014/01/bearistotle-thinking-bear.jpg?w=300',
+            'body': 'Leave me alone and let me code...'
         },
         {
-            'author': {'username': 'Toby'},
-            'body': 'My latest Chad Flenderman novel is now on Amazon!'
+            'author': {'username': 'Jake'},
+            'image': 'https://images.ecosia.org/b2q8xy25isChnGRztjSfBR3I0xk=/0x390/smart/http%3A%2F%2F3.bp.blogspot.com%2F-L1UpkrgK7LE%2FTkxMNtkPE3I%2FAAAAAAAABg8%2FLsiokoBHme8%2Fs1600%2Fhumorous%2Bhilarious%2Bfunny%2Bpictures%2Bof%2Banimals_Polar_Bear.jpg',
+            'body': "I'm just not gonna eat for a week."
         },
         {
-            'author': {'username': 'Michael'},
-            'body': "Ugh, Toby, nobody cares!---Hey, anybody know where Ryan is? He isn't answering my calls..."
+            'author': {'username': 'Jordan'},
+            'image': 'https://images.ecosia.org/8RhGD26cmeiqbckHvYK--4roQd0=/0x390/smart/https%3A%2F%2Fi.pinimg.com%2F236x%2Fba%2Fb1%2F6f%2Fbab16f6102d4867096bd8e9c1a21e5cc.jpg',
+            'body': "Why is the theme bears? Sharks and octopi are way cooler!"
         }
     ]
     return render_template('index.html', title="Home", user=user, posts=posts)
@@ -41,4 +45,3 @@ def login():
 @app.route('/about')
 def about():
     return render_template('about.html', title='About')
-    
