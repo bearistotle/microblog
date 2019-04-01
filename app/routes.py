@@ -52,3 +52,8 @@ def login():
 @app.route('/about')
 def about():
     return render_template('about.html', title='About')
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
