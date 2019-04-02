@@ -1,7 +1,7 @@
 from flask import render_template, flash, redirect, request, url_for
 from app import app
 from app.forms import LoginForm
-from flask_login import current_user, login_user, login_required
+from flask_login import current_user, login_user, login_required, logout_user
 from app.models import User
 from werkzeug.urls import url_parse
 
@@ -14,7 +14,7 @@ def index():
     posts = [
         {
             'author': {'username': 'Car'},
-            'image': 'app/images/thinking-panda.jpg',
+            'image': '/images/thinking-panda.jpg',
             'body': 'Beautiul day in Philly!'
         },
         {
