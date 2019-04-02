@@ -1,37 +1,39 @@
-from flask import render_template, flash, redirect
+from flask import render_template, flash, redirect, request, url_for
 from app import app
 from app.forms import LoginForm
-from flask_login import current_user, login_user
+from flask_login import current_user, login_user, login_required
 from app.models import User
+from werkzeug.urls import url_parse
 
 # define view for index page (both decorators linked to f(x) below)
 @app.route('/')
 @app.route('/index')
+@login_required
 def index():
     user = {'username': 'Brandon'}
     posts = [
         {
             'author': {'username': 'Car'},
-            'image': 'https://i.pinimg.com/474x/83/06/74/830674470a92d1e739b1123a85a727e9.jpg',
+            'image': 'app/images/thinking-panda.jpg',
             'body': 'Beautiul day in Philly!'
         },
         {
             'author': {'username': 'Brandon'},
-            'image': 'https://twistedsifter.files.wordpress.com/2014/01/bearistotle-thinking-bear.jpg?w=300',
+            'image': 'images/ponderbear.jpg',
             'body': 'Leave me alone and let me code...'
         },
         {
             'author': {'username': 'Jake'},
-            'image': 'https://images.ecosia.org/b2q8xy25isChnGRztjSfBR3I0xk=/0x390/smart/http%3A%2F%2F3.bp.blogspot.com%2F-L1UpkrgK7LE%2FTkxMNtkPE3I%2FAAAAAAAABg8%2FLsiokoBHme8%2Fs1600%2Fhumorous%2Bhilarious%2Bfunny%2Bpictures%2Bof%2Banimals_Polar_Bear.jpg',
+            'image': 'images/thinking-polar.jpg',
             'body': "I'm just not gonna eat for a week."
         },
         {
             'author': {'username': 'Jordan'},
-            'image': 'https://images.ecosia.org/8RhGD26cmeiqbckHvYK--4roQd0=/0x390/smart/https%3A%2F%2Fi.pinimg.com%2F236x%2Fba%2Fb1%2F6f%2Fbab16f6102d4867096bd8e9c1a21e5cc.jpg',
+            'image': 'images/thinking-sun.jpg',
             'body': "Why is the theme bears? Sharks and octopi are way cooler!"
         }
     ]
-    return render_template('index.html', title="Home", user=user, posts=posts)
+    return render_template('index.html', title="Home", posts=posts)
 
 # define view for login page
 @app.route('/login', methods=['GET', 'POST'])
@@ -45,7 +47,10 @@ def login():
             flash('Invalid username or password')
             return redirect(url_for('login'))
         login_user(user, remember=form.remember_me.data)
-        return redirect(url_for('index'))
+        next_page = request.args.get('next')
+        if not next_page or url_parse(next_page).netloc != '':
+            next_page = url_for('index')
+        return redirect('/' + next_page)
     return render_template('login.html', title='Sign In', form=form)
 
 # define view for about page
